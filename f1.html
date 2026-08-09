@@ -3,121 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Formula 1 Interactive Hub — live 2026 championship standings, teams, drivers, race calendar and statistics in a single-page fan experience.">
-    <meta name="theme-color" content="#070b12">
+    <meta name="description" content="Formula 1 Interactive Hub — live 2026 championship standings, teams, drivers, race calendar and statistics.">
+    <meta name="theme-color" content="#0e1013">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; base-uri 'self'; form-action 'none'">
     <title>Formula 1 Interactive Hub — 2026 Season</title>
-    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="%23070b12"/><text x="32" y="42" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="%2300c6ca" text-anchor="middle">F1</text></svg>'>
+    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="4" fill="%230e1013"/><text x="32" y="42" font-family="Arial,sans-serif" font-size="24" font-weight="bold" fill="%23eef4ef" text-anchor="middle">F1</text></svg>'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ============ Tokens & Reset ============ */
+        /* ============ Tokens ============ */
         :root {
-            --bg: #070b12;
-            --bg-2: #0d1421;
-            --bg-3: #101827;
-            --panel: rgba(255, 255, 255, 0.045);
-            --panel-strong: rgba(255, 255, 255, 0.07);
-            --line: rgba(0, 198, 202, 0.22);
-            --cyan: #00c6ca;
-            --cyan-deep: #0099cc;
-            --red: #e10600;
-            --text: #eef4f8;
-            --muted: #93a7b8;
-            --font-display: 'Orbitron', 'Arial Black', sans-serif;
-            --font-body: 'Rajdhani', 'Arial', sans-serif;
+            --bg: #0e1013;
+            --bg-2: #121417;
+            --panel: #16181c;
+            --panel-2: #1c1f24;
+            --line: rgba(238, 244, 239, 0.10);
+            --line-2: rgba(238, 244, 239, 0.20);
+            --text: #eef4ef;
+            --muted: #9aa3ab;
+            --faint: #6b7379;
+            --inv: #eef4ef;
+            --ink: #0e1013;
+            --font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 84px;
-        }
+        html { scroll-behavior: smooth; scroll-padding-top: 76px; }
         body {
-            font-family: var(--font-body);
-            background: linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 55%, #0a1220 100%);
+            font-family: var(--font);
+            background: var(--bg);
             color: var(--text);
             overflow-x: hidden;
             line-height: 1.55;
-            font-size: 17px;
+            font-size: 16.5px;
+            -webkit-font-smoothing: antialiased;
         }
-        ::selection { background: rgba(0, 198, 202, 0.35); }
+        ::selection { background: var(--inv); color: var(--ink); }
         a { color: inherit; }
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 22px; }
-        h1, h2, h3, .logo { font-family: var(--font-display); }
+        .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
-        /* ============ Kerb strip divider ============ */
-        .kerb {
-            height: 9px;
-            background: repeating-linear-gradient(90deg, var(--red) 0 42px, #fff 42px 84px);
-            opacity: .85;
+        /* ============ Typography ============ */
+        .kicker {
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--muted);
         }
-        .kerb.flip {
-            background: repeating-linear-gradient(270deg, var(--red) 0 42px, #fff 42px 84px);
+        h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; line-height: 1.08; }
+        .section-head { margin-bottom: 54px; max-width: 720px; }
+        .section-head h2 {
+            font-size: clamp(1.9rem, 4vw, 2.7rem);
+            margin-top: 12px;
         }
+        .section-head p { color: var(--muted); margin-top: 14px; font-size: 1.05rem; max-width: 620px; }
+
+        /* ============ Buttons ============ */
+        .btn {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 15px 28px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+        .btn-primary { background: var(--inv); color: var(--ink); }
+        .btn-primary:hover { transform: translateY(-2px); }
+        .btn-ghost { border-color: var(--line-2); color: var(--text); background: transparent; }
+        .btn-ghost:hover { border-color: var(--text); transform: translateY(-2px); }
+        .btn-sm { padding: 11px 20px; font-size: 0.72rem; }
 
         /* ============ Header ============ */
         header {
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 1000;
-            background: rgba(7, 11, 18, 0.82);
+            background: rgba(14, 16, 19, 0.82);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(0, 198, 202, 0.18);
-            transition: box-shadow 0.3s ease, background 0.3s ease;
+            border-bottom: 1px solid var(--line);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
         }
-        header.scrolled { background: rgba(7, 11, 18, 0.95); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
-        nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 66px;
-        }
+        header.scrolled { background: rgba(14, 16, 19, 0.96); box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45); }
+        nav { display: flex; align-items: center; justify-content: space-between; height: 66px; }
         .logo {
-            font-size: 1.45rem;
+            font-size: 1.12rem;
             font-weight: 800;
-            letter-spacing: 2px;
-            background: linear-gradient(90deg, var(--cyan), #ffffff 60%, var(--cyan));
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: logoShift 6s linear infinite;
-            text-decoration: none;
-        }
-        @keyframes logoShift { 0% { background-position: 0% 0; } 100% { background-position: 200% 0; } }
-        .logo span { -webkit-text-fill-color: var(--red); font-weight: 900; }
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 6px;
-            align-items: center;
-        }
-        .nav-links a {
+            letter-spacing: 0.12em;
             color: var(--text);
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1.02rem;
-            letter-spacing: 1.5px;
-            padding: 8px 15px;
-            border-radius: 25px;
-            position: relative;
-            transition: color 0.25s ease, background 0.25s ease;
         }
-        .nav-links a:hover { color: var(--cyan); background: rgba(0, 198, 202, 0.08); }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            left: 50%; bottom: 2px;
-            width: 0; height: 2px;
-            background: var(--cyan);
-            transform: translateX(-50%);
-            transition: width 0.3s ease;
-            border-radius: 2px;
+        .logo em { font-style: normal; color: var(--faint); }
+        .nav-links { display: flex; list-style: none; gap: 4px; align-items: center; }
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.86rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            padding: 9px 14px;
+            border-radius: 4px;
+            transition: color 0.2s ease, background 0.2s ease;
         }
-        .nav-links a:hover::after { width: 60%; }
+        .nav-links a:hover { color: var(--text); background: rgba(238, 244, 239, 0.06); }
+        .nav-cta { margin-left: 12px; }
         .hamburger {
             display: none;
             flex-direction: column;
@@ -125,17 +120,12 @@
             background: none;
             border: none;
             cursor: pointer;
-            padding: 8px;
+            padding: 10px;
         }
-        .hamburger span {
-            width: 26px; height: 3px;
-            background: var(--cyan);
-            border-radius: 3px;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hamburger span { width: 24px; height: 2px; background: var(--text); transition: transform 0.3s ease, opacity 0.3s ease; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
         .hamburger.open span:nth-child(2) { opacity: 0; }
-        .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
         /* ============ Hero ============ */
         .hero {
@@ -146,689 +136,473 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            padding: 120px 0 90px;
+            padding: 130px 0 90px;
         }
         .hero::before {
             content: '';
             position: absolute; inset: 0;
             background:
-                radial-gradient(ellipse 60% 45% at 20% 20%, rgba(0, 198, 202, 0.14), transparent 60%),
-                radial-gradient(ellipse 55% 40% at 82% 75%, rgba(0, 153, 204, 0.12), transparent 60%),
+                radial-gradient(ellipse 55% 50% at 18% 12%, rgba(238, 244, 239, 0.06), transparent 60%),
+                radial-gradient(ellipse 50% 45% at 85% 85%, rgba(238, 244, 239, 0.045), transparent 60%),
                 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><path d="M 60 0 L 120 60 L 60 120 L 0 60 Z" fill="none" stroke="%23ffffff" stroke-width="0.4" opacity="0.05"/></svg>');
-            background-size: auto, auto, 90px 90px;
+            background-size: auto, auto, 84px 84px;
             pointer-events: none;
         }
         .hero::after {
             content: '';
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            height: 10px;
-            background: repeating-linear-gradient(90deg, var(--red) 0 60px, #fff 60px 120px);
-            opacity: 0.9;
+            height: 1px;
+            background: var(--line);
         }
-        .hero-content { position: relative; z-index: 2; max-width: 900px; padding: 0 22px; }
-        .hero .kicker {
-            display: inline-block;
-            font-family: var(--font-display);
-            font-size: 0.85rem;
-            letter-spacing: 5px;
-            color: var(--cyan);
-            border: 1px solid rgba(0, 198, 202, 0.4);
-            border-radius: 30px;
-            padding: 8px 20px;
-            margin-bottom: 26px;
-            text-transform: uppercase;
-        }
+        .hero-content { position: relative; z-index: 2; max-width: 880px; padding: 0 24px; }
         .hero h1 {
-            font-size: clamp(2.6rem, 7vw, 5rem);
-            font-weight: 900;
-            letter-spacing: 3px;
-            line-height: 1.05;
-            background: linear-gradient(100deg, var(--cyan) 0%, #ffffff 45%, var(--cyan-deep) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 26px rgba(0, 198, 202, 0.35));
+            font-size: clamp(2.7rem, 7vw, 5rem);
+            margin-top: 18px;
+            letter-spacing: -0.03em;
         }
-        .hero h1 .num { color: var(--red); -webkit-text-fill-color: var(--red); }
         .hero .sub {
-            font-size: 1.25rem;
             color: var(--muted);
-            margin: 18px auto 34px;
-            max-width: 640px;
-            font-weight: 500;
+            font-size: 1.15rem;
+            margin: 22px auto 38px;
+            max-width: 620px;
         }
-        .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-        .btn {
-            display: inline-block;
-            font-family: var(--font-display);
-            font-size: 0.95rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-decoration: none;
-            padding: 15px 32px;
-            border-radius: 50px;
-            cursor: pointer;
-            border: 1px solid transparent;
-            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-        }
-        .btn-primary {
-            background: linear-gradient(90deg, var(--cyan), var(--cyan-deep));
-            color: #04121a;
-            box-shadow: 0 10px 30px rgba(0, 198, 202, 0.35);
-        }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 44px rgba(0, 198, 202, 0.55); }
-        .btn-ghost {
-            border-color: rgba(0, 198, 202, 0.5);
-            color: var(--cyan);
-            background: rgba(0, 198, 202, 0.06);
-        }
-        .btn-ghost:hover { transform: translateY(-3px); background: rgba(0, 198, 202, 0.15); }
+        .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-        /* Countdown pill */
+        /* Countdown strip */
         .next-race {
-            margin: 40px auto 0;
-            max-width: 640px;
-            background: var(--panel);
+            margin: 48px auto 0;
+            max-width: 720px;
             border: 1px solid var(--line);
-            border-radius: 20px;
-            padding: 20px 24px;
-            backdrop-filter: blur(10px);
+            background: rgba(22, 24, 28, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 26px 30px 22px;
         }
-        .next-race .label {
-            font-family: var(--font-display);
-            font-size: 0.75rem;
-            letter-spacing: 4px;
-            color: var(--muted);
-            text-transform: uppercase;
-        }
-        .next-race .race-name {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--text);
-            margin: 6px 0 14px;
-        }
-        .next-race .race-name em { color: var(--cyan); font-style: normal; }
-        .countdown { display: flex; justify-content: center; gap: 14px; }
-        .cd-cell {
-            min-width: 66px;
-            background: rgba(0, 198, 202, 0.08);
-            border: 1px solid rgba(0, 198, 202, 0.25);
-            border-radius: 12px;
-            padding: 10px 8px;
-        }
+        .nr-label { font-size: 0.76rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint); }
+        .nr-name { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; margin: 8px 0 20px; }
+        .nr-name em { font-style: normal; color: var(--text); }
+        .countdown { display: flex; justify-content: center; border-top: 1px solid var(--line); padding-top: 18px; }
+        .cd-cell { flex: 1; border-left: 1px solid var(--line); }
+        .cd-cell:first-child { border-left: none; }
         .cd-cell .num {
-            font-family: var(--font-display);
-            font-size: 1.7rem;
-            font-weight: 800;
-            color: var(--cyan);
+            font-size: 1.9rem;
+            font-weight: 700;
             font-variant-numeric: tabular-nums;
+            letter-spacing: -0.02em;
         }
-        .cd-cell .lbl { font-size: 0.72rem; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+        .cd-cell .lbl { font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-top: 2px; }
 
-        /* Hero mini-stats */
         .hero-stats {
             display: flex;
             justify-content: center;
-            gap: 34px;
-            flex-wrap: wrap;
-            margin-top: 34px;
+            gap: 0;
+            margin-top: 44px;
+            border: 1px solid var(--line);
+            max-width: 560px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .hero-stats .hs .n {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text);
-        }
-        .hero-stats .hs .n i { color: var(--cyan); font-style: normal; }
-        .hero-stats .hs .t { font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+        .hero-stats .hs { flex: 1; padding: 16px 8px; border-left: 1px solid var(--line); }
+        .hero-stats .hs:first-child { border-left: none; }
+        .hero-stats .hs .n { font-size: 1.3rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+        .hero-stats .hs .n i { font-style: normal; color: var(--muted); }
+        .hero-stats .hs .t { font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-top: 3px; }
 
         /* ============ Sections ============ */
-        section.block { padding: 96px 0; }
-        .section-head { text-align: center; margin-bottom: 52px; }
-        .section-head .kicker {
-            font-family: var(--font-display);
+        section.block { padding: 100px 0; }
+        .bg-alt { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+        /* ============ Track list (what we track) ============ */
+        .track-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            gap: 56px;
+            align-items: stretch;
+        }
+        .track-list { list-style: none; display: flex; flex-direction: column; }
+        .track-list li {
+            border-bottom: 1px solid var(--line);
+            padding: 26px 8px 26px 0;
+            cursor: pointer;
+            transition: padding-left 0.3s ease;
+            display: flex;
+            align-items: baseline;
+            gap: 18px;
+        }
+        .track-list li:first-child { border-top: 1px solid var(--line); }
+        .track-list li .idx {
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            color: var(--faint);
+            font-variant-numeric: tabular-nums;
+        }
+        .track-list li span.t {
+            font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--muted);
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+        .track-list li .arrow {
+            margin-left: auto;
+            opacity: 0;
+            transform: translateX(-8px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            color: var(--text);
+        }
+        .track-list li:hover { padding-left: 12px; }
+        .track-list li:hover span.t, .track-list li.active span.t { color: var(--text); }
+        .track-list li:hover .arrow, .track-list li.active .arrow { opacity: 1; transform: none; }
+        .track-image {
+            position: relative;
+            border: 1px solid var(--line);
+            background: var(--panel);
+            min-height: 320px;
+            display: flex;
+            align-items: stretch;
+            overflow: hidden;
+        }
+        .track-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.35s ease;
+        }
+        .track-image figcaption {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            padding: 34px 22px 16px;
+            background: linear-gradient(transparent, rgba(14, 16, 19, 0.92));
             font-size: 0.8rem;
-            letter-spacing: 5px;
-            color: var(--cyan);
+            letter-spacing: 0.14em;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            color: var(--muted);
         }
-        .section-head h2 {
-            font-size: clamp(1.8rem, 4vw, 2.7rem);
-            font-weight: 800;
-            letter-spacing: 2px;
-            background: linear-gradient(90deg, var(--cyan), #fff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .section-head p { color: var(--muted); margin-top: 10px; max-width: 640px; margin-left: auto; margin-right: auto; }
-        .bg-alt { background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.02) 20%, rgba(255, 255, 255, 0.02) 80%, transparent); }
 
         /* ============ Standings ============ */
         .standings-grid {
             display: grid;
-            grid-template-columns: 1.15fr 1fr;
-            gap: 30px;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
             align-items: start;
         }
-        .standing-panel {
+        .panel {
             background: var(--panel);
             border: 1px solid var(--line);
-            border-radius: 20px;
-            padding: 26px;
-            backdrop-filter: blur(8px);
-            overflow: hidden;
         }
-        .standing-panel h3 {
-            font-size: 1.15rem;
-            letter-spacing: 2px;
-            color: var(--cyan);
-            margin-bottom: 18px;
+        .panel-head {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--line);
         }
-        .standing-panel h3 .pill {
-            margin-left: auto;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            color: var(--muted);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 30px;
-            padding: 4px 12px;
-            font-family: var(--font-body);
-            font-weight: 600;
+        .panel-head h3 { font-size: 1.02rem; letter-spacing: 0.06em; text-transform: uppercase; }
+        .panel-head .pill {
+            font-size: 0.66rem;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
+            color: var(--faint);
+            white-space: nowrap;
         }
         .s-row {
             display: grid;
-            grid-template-columns: 40px 1fr 90px;
+            grid-template-columns: 46px 1fr auto;
+            gap: 14px;
             align-items: center;
-            gap: 12px;
-            padding: 11px 14px;
-            border-radius: 12px;
-            margin-bottom: 6px;
-            position: relative;
-            background: rgba(255, 255, 255, 0.02);
-            transition: background 0.2s ease, transform 0.2s ease;
+            padding: 15px 24px;
+            border-bottom: 1px solid var(--line);
+            transition: background 0.2s ease;
         }
-        .s-row:hover { background: var(--panel-strong); transform: translateX(4px); }
+        .s-row:last-child { border-bottom: none; }
+        .s-row:hover { background: var(--panel-2); }
         .s-row .pos {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.05rem;
-            color: var(--muted);
-            text-align: center;
-        }
-        .s-row.leader .pos { color: var(--cyan); }
-        .s-row.leader { background: rgba(0, 198, 202, 0.09); border: 1px solid rgba(0, 198, 202, 0.3); }
-        .s-row .who { display: flex; align-items: center; gap: 11px; min-width: 0; }
-        .s-row .dot {
-            width: 11px; height: 11px; border-radius: 50%;
-            flex-shrink: 0;
-            box-shadow: 0 0 8px currentColor;
-        }
-        .s-row .name {
-            font-weight: 700;
-            font-size: 1.05rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .s-row .team { font-size: 0.85rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .s-row .pts {
-            text-align: right;
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.05rem;
-            color: var(--text);
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: var(--faint);
             font-variant-numeric: tabular-nums;
+            letter-spacing: 0.06em;
         }
-        .s-row .pts small { display: block; font-family: var(--font-body); font-weight: 500; font-size: 0.7rem; color: var(--muted); letter-spacing: 1px; }
-        .data-note {
-            margin-top: 16px;
-            font-size: 0.85rem;
-            color: var(--muted);
-            text-align: center;
-            letter-spacing: 0.5px;
-        }
-        .data-note b { color: var(--cyan); }
+        .s-row .name { font-weight: 600; font-size: 1.02rem; }
+        .s-row .name .flag { font-size: 0.85rem; color: var(--muted); }
+        .s-row .team { font-size: 0.84rem; color: var(--muted); }
+        .s-row .pts { text-align: right; }
+        .s-row .pts b { font-size: 1.05rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+        .s-row .pts small { display: block; font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+        .s-row.leader { background: var(--inv); color: var(--ink); }
+        .s-row.leader:hover { background: var(--inv); }
+        .s-row.leader .pos, .s-row.leader .team, .s-row.leader .pts small { color: rgba(14, 16, 19, 0.6); }
+        .s-row.leader .name, .s-row.leader .pts b { color: var(--ink); }
+        .s-row.leader .name .flag { color: rgba(14, 16, 19, 0.6); }
 
-        /* Winners strip */
         .winners-strip {
             margin-top: 34px;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
         }
         .winner-chip {
-            background: var(--panel);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 40px;
+            border: 1px solid var(--line);
             padding: 8px 16px;
-            font-size: 0.92rem;
-            font-weight: 600;
-            transition: border-color 0.2s ease, transform 0.2s ease;
+            font-size: 0.86rem;
+            font-weight: 500;
+            color: var(--muted);
+            transition: border-color 0.2s ease, color 0.2s ease;
+            display: flex;
+            gap: 8px;
+            align-items: baseline;
         }
-        .winner-chip:hover { border-color: var(--cyan); transform: translateY(-2px); }
-        .winner-chip b { color: var(--cyan); }
-        .winner-chip .gp { color: var(--muted); font-weight: 500; }
+        .winner-chip:hover { border-color: var(--line-2); color: var(--text); }
+        .winner-chip b { color: var(--text); font-weight: 600; }
+        .data-note {
+            margin-top: 22px;
+            text-align: center;
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+            color: var(--faint);
+        }
+        .data-note b { color: var(--muted); font-weight: 600; }
 
-        /* ============ Teams ============ */
+        /* ============ Teams (product cards) ============ */
         .teams-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-            gap: 26px;
+            gap: 22px;
         }
         .team-card {
-            --c1: #00c6ca;
-            --c2: #0088a0;
             background: var(--panel);
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            border-radius: 20px;
-            padding: 24px;
+            border: 1px solid var(--line);
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            backdrop-filter: blur(8px);
-        }
-        .team-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--c1), var(--c2));
-        }
-        .team-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
-            border-color: var(--line);
-        }
-        .team-card .top-row {
             display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 16px;
+            flex-direction: column;
+            transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
         }
-        .team-badge {
-            width: 54px; height: 54px;
-            border-radius: 14px;
+        .team-card:hover { border-color: var(--line-2); background: var(--panel-2); transform: translateY(-3px); }
+        .team-card:focus-visible { outline: 1px solid var(--inv); outline-offset: 2px; }
+        .tc-top {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.05rem;
-            color: #fff;
-            background: linear-gradient(135deg, var(--c1), var(--c2));
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
-            flex-shrink: 0;
+            padding: 18px 22px 0;
         }
-        .team-card .titles h3 { font-size: 1.08rem; letter-spacing: 0.5px; line-height: 1.25; }
-        .team-card .titles .pos-chip {
-            display: inline-block;
-            margin-top: 6px;
-            font-size: 0.74rem;
+        .tc-code {
+            font-size: 0.78rem;
             font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--cyan);
-            background: rgba(0, 198, 202, 0.1);
-            border: 1px solid rgba(0, 198, 202, 0.3);
-            border-radius: 30px;
-            padding: 3px 11px;
+            letter-spacing: 0.18em;
+            border: 1px solid var(--line-2);
+            padding: 5px 10px;
         }
-        .team-card .car {
-            position: relative;
-            height: 132px;
-            margin: 4px 0 6px;
-            border-radius: 12px;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.03);
-        }
-        .team-card .car img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s ease, filter 0.3s ease;
-        }
-        .team-card:hover .car img { transform: scale(1.06); filter: brightness(1.12); }
-        .team-card .car .car-fallback-art { display: none; }
-        .team-card .car.car-fallback .car-fallback-art { display: block; position: absolute; inset: 0; }
-        .team-card .car.car-fallback img { display: none; }
-        .modal-car {
-            position: relative;
-            overflow: hidden;
-            border-radius: 16px;
-        }
-        .modal-car img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .modal-car .f1car { display: none; }
-        .team-card .meta {
+        .tc-pos { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+        .tc-name { font-size: 1.12rem; padding: 12px 22px 16px; letter-spacing: -0.01em; }
+        .tc-car { position: relative; overflow: hidden; aspect-ratio: 16 / 9; background: var(--bg); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+        .tc-car img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease, filter 0.3s ease; }
+        .team-card:hover .tc-car img { transform: scale(1.05); filter: brightness(1.08); }
+        .tc-car .car-fallback-art { display: none; }
+        .tc-car.car-fallback .car-fallback-art { display: block; }
+        .tc-car.car-fallback img { display: none; }
+        .spec { padding: 4px 22px; }
+        .spec-row {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4px 14px;
-            font-size: 0.95rem;
-            margin-top: 8px;
+            grid-template-columns: 130px 1fr;
+            gap: 14px;
+            padding: 11px 0;
+            border-bottom: 1px solid var(--line);
         }
-        .team-card .meta .m { color: var(--muted); font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
-        .team-card .meta .v { font-weight: 700; }
-        .team-card .open-hint {
-            margin-top: 16px;
-            text-align: center;
-            font-family: var(--font-display);
-            font-size: 0.72rem;
-            letter-spacing: 3px;
+        .spec-row:last-child { border-bottom: none; }
+        .spec-row dt { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); padding-top: 2px; }
+        .spec-row dd { font-size: 0.96rem; font-weight: 500; text-align: right; }
+        .tc-cta {
+            margin-top: auto;
+            padding: 15px 22px;
+            border-top: 1px solid var(--line);
+            font-size: 0.76rem;
+            letter-spacing: 0.16em;
             text-transform: uppercase;
             color: var(--muted);
-            border-top: 1px dashed rgba(255, 255, 255, 0.12);
-            padding-top: 13px;
-            transition: color 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.2s ease;
         }
-        .team-card:hover .open-hint { color: var(--cyan); }
-
-        /* CSS-drawn F1 car */
-        .f1car { position: absolute; left: 50%; top: 50%; width: 250px; height: 92px; transform: translate(-50%, -50%); transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .team-card:hover .f1car { transform: translate(-50%, -52%) scale(1.04) rotate(-1deg); }
-        .f1car .shadow {
-            position: absolute;
-            bottom: 2px; left: 12%; width: 76%; height: 10px;
-            background: radial-gradient(ellipse, rgba(0, 0, 0, 0.55), transparent 70%);
-            border-radius: 50%;
-        }
-        .f1car .body {
-            position: absolute;
-            left: 8%; top: 20%;
-            width: 84%; height: 46%;
-            background: linear-gradient(160deg, var(--c1), var(--c2) 70%);
-            border-radius: 50% 60% 35% 50% / 60% 70% 55% 60%;
-            clip-path: polygon(0 58%, 4% 44%, 10% 34%, 22% 24%, 34% 15%, 48% 12%, 55% 16%, 62% 20%, 74% 30%, 84% 40%, 94% 48%, 100% 58%, 94% 76%, 82% 88%, 62% 96%, 34% 96%, 16% 88%, 5% 76%);
-            box-shadow: inset 0 6px 12px rgba(255, 255, 255, 0.25), inset 0 -8px 14px rgba(0, 0, 0, 0.35);
-        }
-        .f1car .body::after { /* sidepod stripe */
-            content: '';
-            position: absolute;
-            top: 38%; left: 30%; right: 8%;
-            height: 4px;
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.7), transparent);
-            border-radius: 4px;
-        }
-        .f1car .frontwing {
-            position: absolute;
-            left: 0; top: 56%;
-            width: 26%; height: 7px;
-            background: var(--c2);
-            border-radius: 3px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-        }
-        .f1car .frontwing::before, .f1car .frontwing::after {
-            content: '';
-            position: absolute;
-            top: -4px; width: 4px; height: 15px;
-            background: var(--c2);
-            border-radius: 2px;
-        }
-        .f1car .frontwing::before { left: 4px; }
-        .f1car .frontwing::after { right: 4px; }
-        .f1car .rearwing {
-            position: absolute;
-            right: 0; top: 26%;
-            width: 8px; height: 42%;
-            background: var(--c2);
-            border-radius: 3px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-        }
-        .f1car .rearwing::before {
-            content: '';
-            position: absolute;
-            top: 4px; left: 5px;
-            width: 16px; height: 5px;
-            background: linear-gradient(90deg, var(--c1), var(--c2));
-            border-radius: 3px;
-        }
-        .f1car .cockpit {
-            position: absolute;
-            left: 42%; top: 2%;
-            width: 16%; height: 26%;
-            background: rgba(10, 14, 20, 0.85);
-            border-radius: 50% 50% 40% 40%;
-        }
-        .f1car .halo {
-            position: absolute;
-            left: 40%; top: 26%;
-            width: 21%; height: 22%;
-            border: 4px solid #0a0e14;
-            border-bottom: none;
-            border-radius: 50% 50% 0 0;
-        }
-        .f1car .wheel {
-            position: absolute;
-            width: 26px; height: 26px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 35% 30%, #555, #1a1a1a 55%, #000);
-            border: 3px solid #0c0c0c;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6), inset 0 0 0 2px rgba(255, 255, 255, 0.06);
-        }
-        .f1car .wheel::after {
-            content: '';
-            position: absolute;
-            inset: 5px;
-            border-radius: 50%;
-            border: 1.5px dashed rgba(255, 255, 255, 0.35);
-        }
-        .f1car .w-fl { top: 62%; left: 13%; }
-        .f1car .w-fr { top: 62%; left: 29%; }
-        .f1car .w-rl { top: 64%; right: 12%; }
-        .f1car .w-rr { top: 64%; right: 1%; }
-        .f1car .numplate {
-            position: absolute;
-            right: 24%; top: 44%;
-            font-family: var(--font-display);
-            font-size: 0.62rem;
-            font-weight: 800;
-            color: rgba(255, 255, 255, 0.85);
-            background: rgba(0, 0, 0, 0.45);
-            border-radius: 4px;
-            padding: 1px 5px;
-            letter-spacing: 1px;
-        }
-        .team-card:hover .f1car .wheel { animation: wheelSpin 0.6s linear infinite; }
-        @keyframes wheelSpin { to { transform: rotate(360deg); } }
+        .team-card:hover .tc-cta { color: var(--text); }
 
         /* ============ Drivers ============ */
         .drivers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
             gap: 18px;
         }
         .driver-card {
-            --c1: #00c6ca;
             background: var(--panel);
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            border-radius: 18px;
+            border: 1px solid var(--line);
             padding: 22px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
         }
-        .driver-card:hover { transform: translateY(-5px); box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45); border-color: var(--line); }
-        .driver-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--c1), var(--c2, var(--c1)));
+        .driver-card:hover { border-color: var(--line-2); background: var(--panel-2); transform: translateY(-3px); }
+        .dc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 14px;
+            font-size: 0.72rem;
+            letter-spacing: 0.16em;
+            color: var(--faint);
         }
-        .driver-card .num {
-            position: absolute;
-            top: 12px; right: 14px;
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.18);
-        }
-        .driver-card .davatar {
-            width: 68px; height: 68px;
-            margin: 6px auto 12px;
+        .dc-pos { font-variant-numeric: tabular-nums; }
+        .dc-num { font-size: 0.72rem; }
+        .davatar {
+            width: 92px; height: 92px;
+            margin: 0 auto 16px;
             border-radius: 50%;
+            border: 1px solid var(--line-2);
+            overflow: hidden;
+            background: var(--bg);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.25rem;
-            color: #fff;
-            background: linear-gradient(135deg, var(--c1), var(--c2, var(--c1)));
-            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
-            overflow: hidden;
         }
-        .driver-card .davatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top center;
-            display: block;
+        .davatar img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+        .davatar.initials {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text);
         }
-        .driver-card h3 { font-size: 1.05rem; letter-spacing: 0.5px; }
-        .driver-card .dteam { color: var(--muted); font-weight: 600; font-size: 0.95rem; margin-top: 2px; }
-        .driver-card .dstats {
-            display: flex;
-            justify-content: center;
-            gap: 22px;
-            margin-top: 15px;
-            padding-top: 14px;
-            border-top: 1px dashed rgba(255, 255, 255, 0.12);
-        }
-        .driver-card .ds .n { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; color: var(--cyan); font-variant-numeric: tabular-nums; }
-        .driver-card .ds .t { font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+        .dc-name { font-size: 1.06rem; }
+        .dc-team { color: var(--muted); font-size: 0.88rem; margin: 4px 0 16px; }
+        .spec-mini { padding: 0; text-align: left; }
+        .spec-mini .spec-row { grid-template-columns: 1fr auto; }
 
         /* ============ Calendar ============ */
         .next-card {
             display: grid;
             grid-template-columns: 1fr auto;
-            gap: 30px;
+            gap: 40px;
             align-items: center;
-            background:
-                radial-gradient(ellipse 50% 80% at 85% 50%, rgba(0, 198, 202, 0.12), transparent 60%),
-                var(--panel);
+            background: var(--panel);
             border: 1px solid var(--line);
-            border-radius: 22px;
-            padding: 34px 38px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(8px);
+            padding: 38px 42px;
+            margin-bottom: 26px;
         }
-        .next-card .k { font-family: var(--font-display); font-size: 0.78rem; letter-spacing: 5px; color: var(--cyan); text-transform: uppercase; }
-        .next-card h3 { font-size: 1.9rem; letter-spacing: 1px; margin: 8px 0 4px; }
-        .next-card .circuit { color: var(--muted); font-size: 1.1rem; font-weight: 600; }
+        .next-card .k { font-size: 0.76rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint); }
+        .next-card h3 { font-size: 2.1rem; margin: 10px 0 6px; }
+        .next-card .circuit { color: var(--muted); }
         .next-card .tag {
             display: inline-block;
-            margin-top: 12px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
+            margin-top: 16px;
+            font-size: 0.7rem;
+            letter-spacing: 0.16em;
             text-transform: uppercase;
-            color: #04121a;
-            background: linear-gradient(90deg, var(--cyan), var(--cyan-deep));
-            border-radius: 30px;
-            padding: 5px 14px;
+            background: var(--inv);
+            color: var(--ink);
+            padding: 8px 14px;
+            font-weight: 600;
         }
-        .next-card .cd { display: flex; gap: 12px; }
+        .next-card .cd { display: flex; gap: 0; border: 1px solid var(--line); }
+        .next-card .cd .cd-cell { padding: 16px 10px; text-align: center; border-left: 1px solid var(--line); }
+        .next-card .cd .cd-cell:first-child { border-left: none; }
+        .next-card .cd .cd-cell .num { font-size: 1.6rem; }
+
         .calendar-list { display: grid; gap: 10px; }
         .race-row {
             display: grid;
-            grid-template-columns: 56px 1fr auto auto;
-            gap: 16px;
+            grid-template-columns: 64px 1fr auto auto;
+            gap: 18px;
             align-items: center;
             background: var(--panel);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            padding: 14px 20px;
-            transition: border-color 0.2s ease, transform 0.2s ease;
+            border: 1px solid var(--line);
+            padding: 16px 22px;
+            transition: border-color 0.2s ease, background 0.2s ease;
         }
-        .race-row:hover { border-color: var(--line); transform: translateX(5px); }
-        .race-row .rd {
-            font-family: var(--font-display);
-            font-weight: 800;
-            color: var(--muted);
-            text-align: center;
-        }
-        .race-row .rname { font-weight: 700; font-size: 1.05rem; }
-        .race-row .rcircuit { color: var(--muted); font-size: 0.92rem; }
-        .race-row .rdate { color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
-        .race-row .sprint-tag {
-            font-size: 0.68rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            color: #ffd93d;
-            border: 1px solid rgba(255, 217, 61, 0.5);
-            border-radius: 30px;
-            padding: 3px 10px;
+        .race-row:hover { border-color: var(--line-2); background: var(--panel-2); }
+        .race-row .rd { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; color: var(--faint); font-variant-numeric: tabular-nums; }
+        .race-row .rname { font-weight: 600; font-size: 1.02rem; }
+        .race-row .rcircuit { color: var(--muted); font-size: 0.88rem; }
+        .race-row .rdate { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+        .sprint-tag {
+            font-size: 0.64rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
+            border: 1px solid var(--line-2);
+            padding: 4px 10px;
+            color: var(--muted);
         }
-        .race-row.next {
-            border-color: var(--cyan);
-            background: rgba(0, 198, 202, 0.08);
-        }
-        .race-row.next .rd { color: var(--cyan); }
+        .sprint-tag.sprint-none { border-color: transparent; }
+        .race-row.next { border-color: var(--inv); }
+        .race-row.next .rd { color: var(--inv); }
+        .race-row.next .rname { color: var(--inv); }
 
         /* ============ Stats ============ */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 22px;
+            grid-template-columns: repeat(3, 1fr);
+            border: 1px solid var(--line);
         }
         .stat-card {
-            background: var(--panel);
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            border-radius: 18px;
-            padding: 30px 18px;
+            padding: 44px 26px;
+            border-left: 1px solid var(--line);
+            border-top: 1px solid var(--line);
             text-align: center;
-            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            transition: background 0.2s ease;
         }
-        .stat-card:hover { transform: translateY(-5px); border-color: var(--line); box-shadow: 0 18px 44px rgba(0, 0, 0, 0.4); }
-        .stat-card .s-icon { font-size: 2.1rem; margin-bottom: 12px; filter: drop-shadow(0 0 12px rgba(0, 198, 202, 0.35)); }
+        .stat-card:nth-child(3n + 1) { border-left: none; }
+        .stat-card:nth-child(-n + 3) { border-top: none; }
+        .stat-card:hover { background: var(--panel); }
         .stat-card .s-num {
-            font-family: var(--font-display);
-            font-size: 2.3rem;
-            font-weight: 800;
-            color: var(--cyan);
+            font-size: clamp(2.4rem, 5vw, 3.4rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
             font-variant-numeric: tabular-nums;
-            line-height: 1.1;
+            line-height: 1;
         }
-        .stat-card .s-desc { color: var(--muted); margin-top: 8px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; font-size: 0.85rem; }
+        .stat-card .s-desc {
+            margin-top: 12px;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--faint);
+        }
 
         /* ============ Footer ============ */
-        footer {
-            background: rgba(0, 0, 0, 0.55);
-            border-top: 1px solid rgba(0, 198, 202, 0.2);
-            padding: 56px 0 30px;
-            margin-top: 40px;
-        }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
-        .footer-grid h3 { font-size: 0.95rem; letter-spacing: 2px; color: var(--cyan); margin-bottom: 16px; text-transform: uppercase; }
-        .footer-grid p { color: var(--muted); font-size: 0.98rem; }
-        .footer-grid a { display: block; color: var(--muted); text-decoration: none; margin-bottom: 9px; transition: color 0.2s ease; }
-        .footer-grid a:hover { color: var(--cyan); }
-        .copyright {
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding-top: 22px;
+        .cta-band {
             text-align: center;
-            color: var(--muted);
-            font-size: 0.9rem;
+            padding: 96px 0 0;
         }
-        .copyright b { color: var(--cyan); }
+        .cta-band h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 14px 0 30px; }
+        .cta-band p { color: var(--muted); max-width: 520px; margin: 0 auto 34px; }
+        footer {
+            border-top: 1px solid var(--line);
+            margin-top: 90px;
+            background: var(--bg-2);
+            padding: 54px 0 34px;
+        }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 44px; margin-bottom: 40px; }
+        .footer-grid h3 {
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--faint);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .footer-grid a { display: block; color: var(--muted); text-decoration: none; margin-bottom: 9px; font-size: 0.94rem; transition: color 0.2s ease; }
+        .footer-grid a:hover { color: var(--text); }
+        .footer-grid p { color: var(--muted); font-size: 0.94rem; }
+        .copyright {
+            border-top: 1px solid var(--line);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            font-size: 0.82rem;
+            color: var(--faint);
+        }
+        .copyright b { color: var(--muted); font-weight: 600; }
 
         /* ============ Modal ============ */
         .modal {
@@ -836,144 +610,171 @@
             position: fixed;
             z-index: 2000;
             inset: 0;
-            background: rgba(4, 7, 12, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(8, 9, 11, 0.86);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             overflow-y: auto;
             padding: 30px 16px;
         }
-        .modal.open { display: block; animation: fadeIn 0.25s ease; }
+        .modal.open { display: block; animation: fadeIn 0.22s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .modal-content {
-            background: linear-gradient(160deg, #101827, #0a1220);
-            margin: 0 auto;
+            background: var(--bg-2);
             max-width: 860px;
-            border-radius: 22px;
-            border: 1px solid rgba(0, 198, 202, 0.4);
-            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.7);
-            overflow: hidden;
-            animation: modalUp 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+            margin: 0 auto;
+            border: 1px solid var(--line-2);
+            box-shadow: 0 44px 130px rgba(0, 0, 0, 0.65);
+            animation: modalUp 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
         }
-        @keyframes modalUp { from { transform: translateY(40px) scale(0.97); opacity: 0; } to { transform: none; opacity: 1; } }
+        @keyframes modalUp { from { transform: translateY(28px); opacity: 0; } to { transform: none; opacity: 1; } }
         .modal-head {
             display: flex;
             align-items: center;
             gap: 18px;
             padding: 28px 34px 22px;
-            background: var(--panel);
-            background:
-                linear-gradient(120deg, color-mix(in srgb, var(--mc1, #00c6ca) 30%, transparent), transparent 60%),
-                var(--panel);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid var(--line);
         }
-        .modal-head .team-badge { width: 62px; height: 62px; font-size: 1.2rem; }
-        .modal-head h2 { font-size: 1.5rem; letter-spacing: 1px; line-height: 1.2; }
-        .modal-head .pos-pill {
-            margin-top: 6px;
-            display: inline-block;
-            font-size: 0.74rem;
+        .modal-badge {
+            font-size: 0.86rem;
             font-weight: 700;
-            letter-spacing: 1.5px;
+            letter-spacing: 0.2em;
+            border: 1px solid var(--line-2);
+            padding: 12px 16px;
+            flex-shrink: 0;
+        }
+        .modal-head h2 { font-size: 1.5rem; }
+        .pos-pill {
+            display: inline-block;
+            margin-top: 6px;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: var(--cyan);
-            background: rgba(0, 198, 202, 0.1);
-            border: 1px solid rgba(0, 198, 202, 0.3);
-            border-radius: 30px;
-            padding: 3px 12px;
+            color: var(--muted);
         }
         .close-btn {
             margin-left: auto;
-            width: 42px; height: 42px;
+            width: 40px; height: 40px;
             border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--line-2);
+            background: transparent;
             color: var(--text);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             line-height: 1;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
             flex-shrink: 0;
         }
-        .close-btn:hover { background: var(--red); border-color: var(--red); transform: rotate(90deg); }
+        .close-btn:hover { background: var(--inv); color: var(--ink); transform: rotate(90deg); }
         .modal-tabs {
             display: flex;
-            gap: 8px;
-            padding: 18px 34px 0;
-            flex-wrap: wrap;
+            gap: 4px;
+            padding: 0 34px;
+            border-bottom: 1px solid var(--line);
         }
         .mtab {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
             color: var(--muted);
-            font-family: var(--font-display);
-            font-size: 0.72rem;
-            letter-spacing: 2px;
+            font-family: var(--font);
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
-            padding: 9px 18px;
-            border-radius: 30px;
+            padding: 18px 16px;
             cursor: pointer;
-            transition: all 0.25s ease;
+            margin-bottom: -1px;
+            transition: color 0.2s ease, border-color 0.2s ease;
         }
-        .mtab.active, .mtab:hover {
-            background: linear-gradient(90deg, var(--cyan), var(--cyan-deep));
-            color: #04121a;
-            border-color: transparent;
-            font-weight: 700;
-        }
-        .modal-body { padding: 26px 34px 36px; }
+        .mtab:hover { color: var(--text); }
+        .mtab.active { color: var(--text); border-bottom-color: var(--inv); }
+        .modal-body { padding: 30px 34px 38px; }
         .mtabpane { display: none; }
-        .mtabpane.active { display: block; animation: fadeIn 0.25s ease; }
-        .info-grid {
+        .mtabpane.active { display: block; animation: fadeIn 0.22s ease; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 34px; }
+        .info-grid .ig { padding: 16px 0; border-bottom: 1px solid var(--line); }
+        .info-grid .ig:nth-last-child(-n + 2) { border-bottom: none; }
+        .info-grid .ig .k { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); }
+        .info-grid .ig .v { font-weight: 600; font-size: 1.05rem; margin-top: 4px; }
+        .modal-car {
+            border: 1px solid var(--line);
+            background: var(--bg);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .modal-car img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .modal-car .f1car { position: relative; height: 220px; }
+        .spec-box { border: 1px solid var(--line); }
+        .spec-box h4 {
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--faint);
+            font-weight: 600;
+            padding: 16px 22px 0;
+        }
+        .spec-box ul { list-style: none; padding: 6px 22px 14px; }
+        .spec-box li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--line);
+            font-size: 0.95rem;
+            color: var(--muted);
+        }
+        .spec-box li:last-child { border-bottom: none; }
+        .spec-box li b { color: var(--text); font-weight: 600; margin-right: 6px; }
+        .history-text { color: var(--muted); line-height: 1.85; }
+        .milestones { list-style: none; margin-top: 22px; }
+        .milestones li {
+            padding: 13px 0;
+            border-bottom: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 0.95rem;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px 28px;
+            grid-template-columns: 20px 1fr;
+            gap: 10px;
         }
-        .info-grid .ig .k { font-size: 0.76rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
-        .info-grid .ig .v { font-weight: 700; font-size: 1.08rem; margin-top: 2px; }
-        .spec-box {
-            background: var(--panel);
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            border-radius: 16px;
-            padding: 20px 22px;
-            margin-top: 20px;
-        }
-        .spec-box h4 { color: var(--cyan); letter-spacing: 1.5px; font-size: 0.9rem; margin-bottom: 12px; text-transform: uppercase; }
-        .spec-box ul { list-style: none; }
-        .spec-box li { padding: 6px 0 6px 22px; position: relative; color: var(--muted); }
-        .spec-box li::before { content: '▸'; position: absolute; left: 0; color: var(--cyan); }
-        .spec-box li b { color: var(--text); }
-        .modal-car { height: 170px; position: relative; margin: 20px 0 6px; background: rgba(255, 255, 255, 0.03); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.07); }
-        .history-text { color: var(--muted); line-height: 1.8; }
-        .history-text b { color: var(--text); }
-        .milestones { list-style: none; margin-top: 18px; }
-        .milestones li { padding: 9px 0 9px 26px; position: relative; border-bottom: 1px dashed rgba(255, 255, 255, 0.08); color: var(--muted); }
-        .milestones li::before { content: '🏁'; position: absolute; left: 0; top: 8px; font-size: 0.85rem; }
-        .milestones li b { color: var(--text); }
-        .season-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 14px;
-        }
+        .milestones li::before { content: '▸'; color: var(--text); font-size: 0.8rem; padding-top: 2px; }
+        .milestones li b { color: var(--text); font-weight: 500; }
+        .season-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; }
         .season-stat {
-            background: var(--panel);
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            border-radius: 14px;
-            padding: 18px 10px;
+            border: 1px solid var(--line);
+            padding: 22px 12px;
             text-align: center;
         }
-        .season-stat .n { font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; color: var(--cyan); }
-        .season-stat .t { font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+        .season-stat .n { font-size: 1.7rem; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+        .season-stat .t { margin-top: 6px; font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
 
-        /* ============ Reveal animation ============ */
-        .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1); }
+        /* ============ CSS-drawn car fallback ============ */
+        .f1car { position: relative; width: 100%; height: 100%; min-height: 120px; }
+        .f1car .body, .f1car .frontwing, .f1car .rearwing, .f1car .wheel, .f1car .cockpit, .f1car .halo, .f1car .shadow, .f1car .numplate { position: absolute; }
+        .f1car .shadow { bottom: 8px; left: 15%; width: 70%; height: 8px; background: radial-gradient(ellipse, rgba(0,0,0,.5), transparent 70%); border-radius: 50%; }
+        .f1car .body { left: 10%; top: 30%; width: 80%; height: 36%; border-radius: 50% 60% 35% 50% / 60% 70% 55% 60%; background: linear-gradient(160deg, var(--c1, #eef4ef), var(--c2, #6b7379)); }
+        .f1car .frontwing { left: 2%; top: 56%; width: 24%; height: 6px; background: var(--c2, #6b7379); border-radius: 3px; }
+        .f1car .rearwing { right: 2%; top: 30%; width: 7px; height: 34%; background: var(--c2, #6b7379); border-radius: 3px; }
+        .f1car .cockpit { left: 44%; top: 24%; width: 14%; height: 20%; background: rgba(10,12,15,.85); border-radius: 50% 50% 40% 40%; }
+        .f1car .halo { left: 42%; top: 40%; width: 18%; height: 18%; border: 3px solid #0a0c0f; border-bottom: none; border-radius: 50% 50% 0 0; }
+        .f1car .wheel { width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #444, #16181c 55%, #000); border: 2px solid #000; }
+        .f1car .w-fl { top: 60%; left: 14%; }
+        .f1car .w-fr { top: 60%; left: 30%; }
+        .f1car .w-rl { top: 62%; right: 12%; }
+        .f1car .w-rr { top: 62%; right: 2%; }
+        .f1car .numplate { right: 24%; top: 42%; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; color: #eef4ef; background: rgba(0,0,0,.5); padding: 1px 5px; }
+
+        /* ============ Reveal ============ */
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1); }
         .reveal.in { opacity: 1; transform: none; }
 
         /* ============ Responsive ============ */
-        @media (max-width: 900px) {
+        @media (max-width: 960px) {
             .standings-grid { grid-template-columns: 1fr; }
-            .next-card { grid-template-columns: 1fr; text-align: center; }
-            .next-card .cd { justify-content: center; }
-            .footer-grid { grid-template-columns: 1fr; gap: 26px; }
+            .track-grid { grid-template-columns: 1fr; gap: 34px; }
+            .next-card { grid-template-columns: 1fr; gap: 26px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .stat-card:nth-child(3n + 1) { border-left: 1px solid var(--line); }
+            .stat-card:nth-child(2n + 1) { border-left: none; }
+            .stat-card:nth-child(-n + 3) { border-top: 1px solid var(--line); }
+            .stat-card:nth-child(-n + 2) { border-top: none; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
             .info-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 720px) {
@@ -983,24 +784,24 @@
                 top: 66px; left: 0; right: 0;
                 flex-direction: column;
                 align-items: stretch;
-                background: rgba(7, 11, 18, 0.98);
+                background: rgba(14, 16, 19, 0.98);
                 border-bottom: 1px solid var(--line);
-                padding: 10px 18px 18px;
-                gap: 4px;
+                padding: 10px 18px 20px;
+                gap: 2px;
                 transform: translateY(-130%);
                 transition: transform 0.35s ease;
-                max-height: calc(100vh - 66px);
-                overflow-y: auto;
             }
             .nav-links.open { transform: none; }
-            .nav-links a { display: block; padding: 13px 16px; }
-            section.block { padding: 70px 0; }
-            .race-row { grid-template-columns: 40px 1fr auto; }
+            .nav-links a { display: block; padding: 14px 16px; }
+            .nav-cta { display: none; }
+            section.block { padding: 72px 0; }
+            .race-row { grid-template-columns: 48px 1fr auto; }
             .race-row .rdate { grid-column: 2 / -1; text-align: left; }
             .modal-head { padding: 22px 20px 16px; }
-            .modal-tabs { padding: 14px 20px 0; }
-            .modal-body { padding: 20px 20px 28px; }
-            .hero h1 { letter-spacing: 1px; }
+            .modal-tabs { padding: 0 20px; overflow-x: auto; }
+            .modal-body { padding: 22px 20px 28px; }
+            .next-card { padding: 28px 24px; }
+            .next-card .cd { flex-wrap: wrap; }
         }
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
@@ -1014,15 +815,16 @@
     <!-- ================= HEADER ================= -->
     <header id="siteHeader">
         <nav class="container">
-            <a class="logo" href="#home">F1<span>//</span>HUB</a>
+            <a class="logo" href="#home">F1<em>//</em>HUB</a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#track">What we track</a></li>
                 <li><a href="#standings">Standings</a></li>
                 <li><a href="#teams">Teams</a></li>
                 <li><a href="#drivers">Drivers</a></li>
                 <li><a href="#calendar">Calendar</a></li>
-                <li><a href="#stats">Stats</a></li>
             </ul>
+            <div class="nav-cta"><a href="#standings" class="btn btn-primary btn-sm">Standings</a></div>
             <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
@@ -1033,16 +835,16 @@
     <section class="hero" id="home">
         <div class="hero-content" id="heroContent">
             <span class="kicker">2026 FIA Formula One World Championship</span>
-            <h1>FORMULA <span class="num">1</span><br>Interactive Hub</h1>
-            <p class="sub">The pinnacle of motorsport, live at your fingertips — current championship standings, all 11 teams and 22 drivers, the full race calendar and season statistics.</p>
+            <h1>Formula 1,<br>decoded.</h1>
+            <p class="sub">The pinnacle of motorsport — live championship data, all eleven teams, every driver, and the full race calendar, in one place.</p>
             <div class="hero-ctas">
-                <a href="#standings" class="btn btn-primary">View Standings</a>
-                <a href="#teams" class="btn btn-ghost">Meet the Teams</a>
+                <a href="#standings" class="btn btn-primary">View standings</a>
+                <a href="#teams" class="btn btn-ghost">Explore teams</a>
             </div>
 
             <div class="next-race" id="nextRacePill">
-                <div class="label">Next Race · Round <span id="nextRound">12</span> of 22</div>
-                <div class="race-name"><em id="nextRaceName">Dutch Grand Prix</em> · Circuit Zandvoort</div>
+                <div class="nr-label">Next race · Round <span id="nextRound">12</span> of 22</div>
+                <div class="nr-name"><em id="nextRaceName">Dutch Grand Prix</em> · Circuit Zandvoort</div>
                 <div class="countdown" id="countdown">
                     <div class="cd-cell"><div class="num" id="cdD">--</div><div class="lbl">Days</div></div>
                     <div class="cd-cell"><div class="num" id="cdH">--</div><div class="lbl">Hours</div></div>
@@ -1052,71 +854,112 @@
             </div>
 
             <div class="hero-stats">
-                <div class="hs"><div class="n"><i>11</i>/22</div><div class="t">Rounds Complete</div></div>
-                <div class="hs"><div class="n"><i>5</i></div><div class="t">Different Winners</div></div>
-                <div class="hs"><div class="n"><i>219</i> pts</div><div class="t">Antonelli Leads</div></div>
+                <div class="hs"><div class="n"><i>11</i>/22</div><div class="t">Rounds complete</div></div>
+                <div class="hs"><div class="n"><i>5</i></div><div class="t">Different winners</div></div>
+                <div class="hs"><div class="n"><i>219</i> pts</div><div class="t">Antonelli leads</div></div>
             </div>
         </div>
     </section>
-    <div class="kerb"></div>
 
-    <!-- ================= STANDINGS ================= -->
-    <section class="block" id="standings">
+    <!-- ================= WHAT WE TRACK ================= -->
+    <section class="block" id="track">
         <div class="container">
             <div class="section-head reveal">
-                <div class="kicker">Live Championship</div>
-                <h2>2026 Standings</h2>
-                <p>After the Hungarian Grand Prix — round 11 of 22. Kimi Antonelli leads the title fight as a rookie sensation, with Mercedes in control of the Constructors' race.</p>
+                <div class="kicker">The season</div>
+                <h2>What we track</h2>
+                <p>Every signal that matters across the 2026 championship — from the battle at the front to the next lights out.</p>
+            </div>
+            <div class="track-grid">
+                <ul class="track-list reveal" id="trackList">
+                    <li data-img="images/teams/mercedes.webp" data-cap="The championship lead — Mercedes">
+                        <span class="idx">01</span><span class="t">The championship lead.</span><span class="arrow">→</span>
+                    </li>
+                    <li data-img="images/teams/ferrari.jpg" data-cap="The team form — Ferrari">
+                        <span class="idx">02</span><span class="t">The team form.</span><span class="arrow">→</span>
+                    </li>
+                    <li data-img="images/teams/redbull.jpg" data-cap="The driver battles — Red Bull Racing">
+                        <span class="idx">03</span><span class="t">The driver battles.</span><span class="arrow">→</span>
+                    </li>
+                    <li data-img="images/teams/mclaren.jpg" data-cap="The race calendar — McLaren">
+                        <span class="idx">04</span><span class="t">The race calendar.</span><span class="arrow">→</span>
+                    </li>
+                    <li data-img="images/teams/aston.jpg" data-cap="The records — Aston Martin">
+                        <span class="idx">05</span><span class="t">The records.</span><span class="arrow">→</span>
+                    </li>
+                    <li data-img="images/teams/alpine.jpg" data-cap="The next race — Alpine">
+                        <span class="idx">06</span><span class="t">The next race.</span><span class="arrow">→</span>
+                    </li>
+                </ul>
+                <figure class="track-image reveal" id="trackImage">
+                    <img id="trackImg" src="images/teams/mercedes.webp" alt="The championship lead — Mercedes 2026 car" loading="lazy" width="800" height="600">
+                    <figcaption id="trackCap">The championship lead — Mercedes</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= STANDINGS ================= -->
+    <section class="block bg-alt" id="standings">
+        <div class="container">
+            <div class="section-head reveal">
+                <div class="kicker">Live championship</div>
+                <h2>2026 standings</h2>
+                <p>After the Hungarian Grand Prix — round 11 of 22. Kimi Antonelli leads the title fight; Mercedes controls the constructors' race.</p>
             </div>
 
             <div class="standings-grid">
-                <div class="standing-panel reveal">
-                    <h3>Drivers' Championship <span class="pill">Top 10</span></h3>
+                <div class="panel reveal">
+                    <div class="panel-head">
+                        <h3>Drivers' championship</h3>
+                        <span class="pill">Top 10</span>
+                    </div>
                     <div id="driversStanding"></div>
                 </div>
-                <div class="standing-panel reveal">
-                    <h3>Constructors' Championship <span class="pill">All 11</span></h3>
+                <div class="panel reveal">
+                    <div class="panel-head">
+                        <h3>Constructors' championship</h3>
+                        <span class="pill">All 11</span>
+                    </div>
                     <div id="teamsStanding"></div>
                 </div>
             </div>
 
             <div class="winners-strip reveal" id="winnersStrip"></div>
-            <p class="data-note">Data as of <b>Hungarian GP · 26 July 2026</b> · Sprint events in China, Miami, Canada &amp; Britain already run · 6 different winners so far</p>
+            <p class="data-note">Data as of <b>Hungarian GP · 26 July 2026</b> · Sprints in China, Miami, Canada &amp; Britain already run</p>
         </div>
     </section>
 
     <!-- ================= TEAMS ================= -->
-    <section class="block bg-alt" id="teams">
+    <section class="block" id="teams">
         <div class="container">
             <div class="section-head reveal">
-                <div class="kicker">The Grid</div>
-                <h2>F1 Teams · 2026</h2>
-                <p>Eleven constructors, from Maranello's legend to Cadillac's debut. Click any team for its story, car details and season form.</p>
+                <div class="kicker">The grid</div>
+                <h2>Teams · 2026</h2>
+                <p>Eleven constructors, from Maranello's legend to Cadillac's debut. Select a team for its story, car and season form.</p>
             </div>
             <div class="teams-grid" id="teamsGrid"></div>
         </div>
     </section>
-    <div class="kerb flip"></div>
 
     <!-- ================= DRIVERS ================= -->
-    <section class="block" id="drivers">
+    <section class="block bg-alt" id="drivers">
         <div class="container">
             <div class="section-head reveal">
-                <div class="kicker">The Athletes</div>
-                <h2>Championship Drivers · 2026</h2>
-                <p>All 22 drivers currently on the grid, ranked by points scored so far this season.</p>
+                <div class="kicker">The athletes</div>
+                <h2>Drivers · 2026</h2>
+                <p>All 22 drivers on the grid, ranked by points scored so far this season.</p>
             </div>
             <div class="drivers-grid" id="driversGrid"></div>
         </div>
     </section>
 
     <!-- ================= CALENDAR ================= -->
-    <section class="block bg-alt" id="calendar">
+    <section class="block" id="calendar">
         <div class="container">
             <div class="section-head reveal">
-                <div class="kicker">Race Calendar</div>
-                <h2>2026 Season Schedule</h2>
-                <p>The season was reduced to 22 rounds after the Bahrain and Saudi Arabian Grands Prix were cancelled; Bahrain moves to Sepang in October, and Madrid joins as a brand-new street circuit.</p>
+                <div class="kicker">Race calendar</div>
+                <h2>2026 season schedule</h2>
+                <p>Twenty-two rounds — the Bahrain and Saudi Arabian Grands Prix were cancelled; Madrid joins as a brand-new street circuit.</p>
             </div>
 
             <div class="next-card reveal" id="nextCard"></div>
@@ -1125,41 +968,54 @@
     </section>
 
     <!-- ================= STATS ================= -->
-    <section class="block" id="stats">
+    <section class="block bg-alt" id="stats">
         <div class="container">
             <div class="section-head reveal">
-                <div class="kicker">By the Numbers</div>
-                <h2>F1 Statistics · 2026</h2>
-                <p>Everything that makes the 2026 season special — the biggest regulation overhaul in a generation.</p>
+                <div class="kicker">By the numbers</div>
+                <h2>Statistics · 2026</h2>
+                <p>The season's defining figures, under the biggest regulation overhaul in a generation.</p>
             </div>
-            <div class="stats-grid" id="statsGrid"></div>
+            <div class="stats-grid reveal" id="statsGrid"></div>
         </div>
     </section>
 
     <!-- ================= FOOTER ================= -->
+    <section class="block cta-band" id="follow">
+        <div class="container">
+            <div class="kicker">Take action</div>
+            <h2>Follow the championship.<br>Know the grid.</h2>
+            <p>Book the calendar, learn the teams, and never miss a lights out.</p>
+            <div class="hero-ctas">
+                <a href="#standings" class="btn btn-primary">View standings</a>
+                <a href="#calendar" class="btn btn-ghost">Race calendar</a>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <a class="logo" href="#home">F1<span>//</span>HUB</a>
-                    <p style="margin-top:14px;">An unofficial fan-built interactive hub for the 2026 Formula 1 season. Built as a single HTML file — no frameworks, no build steps.</p>
+                    <a class="logo" href="#home">F1<em>//</em>HUB</a>
+                    <p style="margin-top:14px;">An unofficial fan-built interactive hub for the 2026 Formula 1 season. A single HTML file — no frameworks, no build steps.</p>
                 </div>
                 <div>
                     <h3>Explore</h3>
-                    <a href="#standings">Championship Standings</a>
+                    <a href="#standings">Standings</a>
                     <a href="#teams">Teams</a>
                     <a href="#drivers">Drivers</a>
-                    <a href="#calendar">Race Calendar</a>
+                    <a href="#calendar">Calendar</a>
                     <a href="#stats">Statistics</a>
                 </div>
                 <div>
-                    <h3>Season Notes</h3>
-                    <p>New 2026 power units: 1.0L V6 turbo-hybrids with a 50/50 ICE/electric split and sustainable fuels.</p>
-                    <p style="margin-top:10px;">Cadillac joins the grid; Audi debuts as a works entry; Aston Martin partners with Honda.</p>
+                    <h3>Season notes</h3>
+                    <p>New 2026 power units — 1.0L V6 turbo-hybrids with a 50/50 ICE/electric split.</p>
+                    <p style="margin-top:10px;">Cadillac joins the grid; Audi debuts as a works entry.</p>
                 </div>
             </div>
             <div class="copyright">
                 <p>&copy; <span id="year">2026</span> <b>F1 Interactive Hub</b> — unofficial fan project, not affiliated with Formula 1 or the FIA.</p>
+                <p>Design language inspired by <b>seasats.com</b></p>
             </div>
         </div>
     </footer>
@@ -1168,7 +1024,7 @@
     <div class="modal" id="teamModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
             <div class="modal-head" id="modalHead">
-                <div class="team-badge" id="modalBadge">--</div>
+                <div class="modal-badge" id="modalBadge">--</div>
                 <div>
                     <h2 id="modalTitle">Team</h2>
                     <span class="pos-pill" id="modalPill"></span>
@@ -1177,9 +1033,9 @@
             </div>
             <div class="modal-tabs" id="modalTabs">
                 <button class="mtab active" data-tab="overview">Overview</button>
-                <button class="mtab" data-tab="car">The Car</button>
+                <button class="mtab" data-tab="car">The car</button>
                 <button class="mtab" data-tab="history">History</button>
-                <button class="mtab" data-tab="season">2026 Form</button>
+                <button class="mtab" data-tab="season">2026 form</button>
             </div>
             <div class="modal-body">
                 <div class="mtabpane active" id="pane-overview"><div class="info-grid" id="overviewGrid"></div></div>
@@ -1201,6 +1057,5 @@
     </noscript>
 
     <script src="f1.js" defer></script>
-
 </body>
 </html>

@@ -13,6 +13,11 @@ Served from the `arena/019fc2f6-f1` branch via GitHub Pages (legacy build with
 Fallback preview (proxies the file from the branch):
 https://htmlpreview.github.io/?https://github.com/EvilSnIzer/F1/blob/arena/019fc2f6-f1/f1.html
 
+## Design
+
+Monochromatic, defense-tech aesthetic inspired by [seasats.com](https://www.seasats.com/) —
+interactive "what we track" hover list, spec-table rows, inverted leader rows, hairline borders, restrained animations.
+
 ## Features
 
 - **Live 2026 championship data** — drivers' & constructors' standings as of the

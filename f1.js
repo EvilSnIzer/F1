@@ -244,44 +244,33 @@
         function renderStandings() {
             const ds = $('#driversStanding');
             const top = drivers.slice(0, 10);
-            const maxPts = top[0].pts;
             ds.innerHTML = top.map(d => {
                 const t = teamOf(d.team);
                 return `
                     <div class="s-row ${d.pos === 1 ? 'leader' : ''}">
-                        <span class="pos">${d.pos}</span>
+                        <span class="pos">${String(d.pos).padStart(2, '0')}</span>
                         <div class="who">
-                            <span class="dot" style="background:${t.c1}; color:${t.c1};"></span>
-                            <div>
-                                <div class="name">${esc(d.name)} <span style="font-size:.85rem;">${d.flag}</span></div>
-                                <div class="team">${esc(t.short)}</div>
-                            </div>
+                            <div class="name">${esc(d.name)} <span class="flag">${esc(d.flag)}</span></div>
+                            <div class="team">${esc(t.short)}</div>
                         </div>
-                        <div class="pts">${d.pts}<small>${d.wins > 0 ? d.wins + ' win' + (d.wins > 1 ? 's' : '') : 'pts'}</small></div>
+                        <div class="pts"><b>${d.pts}</b><small>${d.wins > 0 ? d.wins + ' win' + (d.wins > 1 ? 's' : '') : 'pts'}</small></div>
                     </div>`;
             }).join('');
 
             const ts = $('#teamsStanding');
             const sorted = [...teams].sort((a, b) => a.pos - b.pos);
-            const maxTeamPts = sorted[0].points;
-            ts.innerHTML = sorted.map(t => {
-                const pct = Math.max((t.points / maxTeamPts) * 100, 2);
-                return `
-                    <div class="s-row ${t.pos === 1 ? 'leader' : ''}">
-                        <span class="pos">${t.pos}</span>
-                        <div class="who">
-                            <span class="dot" style="background:${t.c1}; color:${t.c1};"></span>
-                            <div>
-                                <div class="name">${esc(t.short)}</div>
-                                <div class="team">${esc(t.drivers[0])} / ${esc(t.drivers[1])}</div>
-                            </div>
-                        </div>
-                        <div class="pts">${t.points}<small>pts</small></div>
-                    </div>`;
-            }).join('');
+            ts.innerHTML = sorted.map(t => `
+                <div class="s-row ${t.pos === 1 ? 'leader' : ''}">
+                    <span class="pos">${String(t.pos).padStart(2, '0')}</span>
+                    <div class="who">
+                        <div class="name">${esc(t.short)}</div>
+                        <div class="team">${esc(t.drivers[0])} / ${esc(t.drivers[1])}</div>
+                    </div>
+                    <div class="pts"><b>${t.points}</b><small>pts</small></div>
+                </div>`).join('');
 
             $('#winnersStrip').innerHTML = winners.map(w =>
-                `<span class="winner-chip"><b>${esc(w.winner)}</b> · <span class="gp">${esc(w.gp)} GP</span></span>`
+                `<span class="winner-chip"><b>${esc(w.winner)}</b><span class="gp">${esc(w.gp)} GP</span></span>`
             ).join('');
         }
 
@@ -291,28 +280,24 @@
         function renderTeams() {
             const sorted = [...teams].sort((a, b) => a.pos - b.pos);
             $('#teamsGrid').innerHTML = sorted.map((t, i) => `
-                <article class="team-card reveal" style="--c1:${t.c1}; --c2:${t.c2}; transition-delay:${(i % 3) * 0.08}s"
-                         data-team="${t.key}" tabindex="0"
-                         role="button" aria-label="Open ${esc(t.name)} details">
-                    <div class="top-row">
-                        <div class="team-badge">${esc(t.code)}</div>
-                        <div class="titles">
-                            <h3>${esc(t.name)}</h3>
-                            <span class="pos-chip">${t.pos}${ordinal(t.pos)} · ${t.points} pts</span>
-                        </div>
+                <article class="team-card reveal" data-team="${t.key}" tabindex="0" role="button"
+                         aria-label="Open ${esc(t.name)} details" style="transition-delay:${(i % 3) * 0.08}s">
+                    <div class="tc-top">
+                        <span class="tc-code">${esc(t.code)}</span>
+                        <span class="tc-pos">${t.pos}${ordinal(t.pos)} · ${t.points} pts</span>
                     </div>
-                    <div class="car">
+                    <h3 class="tc-name">${esc(t.name)}</h3>
+                    <div class="tc-car car">
                         <img src="images/teams/${t.img}" alt="${esc(t.short)} 2026 F1 car"
                              loading="lazy" width="600" height="340">
                         <div class="car-fallback-art">${carArt(t.c1, t.c2, t.code)}</div>
                     </div>
-                    <div class="meta">
-                        <div><div class="m">Drivers</div><div class="v">${esc(t.drivers[0])}</div></div>
-                        <div><div class="m">&nbsp;</div><div class="v">${esc(t.drivers[1])}</div></div>
-                        <div><div class="m">Team Principal</div><div class="v">${esc(t.principal)}</div></div>
-                        <div><div class="m">Power Unit</div><div class="v">${esc(t.engine)}</div></div>
-                    </div>
-                    <div class="open-hint">View Details ▸</div>
+                    <dl class="spec">
+                        <div class="spec-row"><dt>Drivers</dt><dd>${esc(t.drivers[0])} · ${esc(t.drivers[1])}</dd></div>
+                        <div class="spec-row"><dt>Team Principal</dt><dd>${esc(t.principal)}</dd></div>
+                        <div class="spec-row"><dt>Power Unit</dt><dd>${esc(t.engine)}</dd></div>
+                    </dl>
+                    <div class="tc-cta">View details <span>→</span></div>
                 </article>
             `).join('');
         }
@@ -330,19 +315,22 @@
             $('#driversGrid').innerHTML = drivers.map((d, i) => {
                 const t = teamOf(d.team);
                 return `
-                    <article class="driver-card reveal" style="--c1:${t.c1}; --c2:${t.c2}; transition-delay:${(i % 4) * 0.06}s">
-                        <span class="num">#${d.num}</span>
+                    <article class="driver-card reveal" style="transition-delay:${(i % 4) * 0.05}s">
+                        <div class="dc-head">
+                            <span class="dc-pos">${String(d.pos).padStart(2, '0')}</span>
+                            <span class="dc-num">#${d.num}</span>
+                        </div>
                         <div class="davatar" data-name="${esc(d.name)}">
                             <img src="images/drivers/${d.img}" alt="${esc(d.name)}"
                                  loading="lazy" width="136" height="136">
                         </div>
-                        <h3>${esc(d.name)} ${esc(d.flag)}</h3>
-                        <div class="dteam">${esc(t.short)}</div>
-                        <div class="dstats">
-                            <div class="ds"><div class="n">${d.pos}</div><div class="t">Position</div></div>
-                            <div class="ds"><div class="n">${d.pts}</div><div class="t">Points</div></div>
-                            <div class="ds"><div class="n">${d.wins}</div><div class="t">Wins</div></div>
-                        </div>
+                        <h3 class="dc-name">${esc(d.name)} ${esc(d.flag)}</h3>
+                        <p class="dc-team">${esc(t.short)}</p>
+                        <dl class="spec spec-mini">
+                            <div class="spec-row"><dt>Position</dt><dd>${d.pos}</dd></div>
+                            <div class="spec-row"><dt>Points</dt><dd>${d.pts}</dd></div>
+                            <div class="spec-row"><dt>Wins</dt><dd>${d.wins}</dd></div>
+                        </dl>
                     </article>`;
             }).join('');
         }
@@ -357,10 +345,10 @@
         function renderCalendar() {
             const next = NEXT_RACE;
             $('#nextCard').innerHTML = `
-                <div>
-                    <div class="k">Up Next · Round ${next.round} of ${SEASON.totalRounds}</div>
+                <div class="nc-info">
+                    <div class="k">Up next · Round ${next.round} of ${SEASON.totalRounds}</div>
                     <h3>${esc(next.name)}</h3>
-                    <div class="circuit">${esc(next.circuit)} · ${esc(next.country)} · ${esc(calendar[0].dates)}</div>
+                    <p class="circuit">${esc(next.circuit)} · ${esc(next.country)} · ${esc(calendar[0].dates)}</p>
                     <span class="tag">${formatRaceDate(next.start)}</span>
                 </div>
                 <div class="cd" id="nextCd">
@@ -377,7 +365,7 @@
                         <div class="rname">${esc(r.name)}</div>
                         <div class="rcircuit">${esc(r.circuit)}</div>
                     </div>
-                    ${r.sprint ? '<span class="sprint-tag">Sprint</span>' : '<span></span>'}
+                    ${r.sprint ? '<span class="sprint-tag">Sprint</span>' : '<span class="sprint-tag sprint-none"></span>'}
                     <span class="rdate">${esc(r.dates)}</span>
                 </div>
             `).join('');
@@ -392,8 +380,7 @@
            ============================================================ */
         function renderStats() {
             $('#statsGrid').innerHTML = stats.map((s, i) => `
-                <div class="stat-card reveal" style="transition-delay:${(i % 3) * 0.07}s">
-                    <div class="s-icon">${esc(s.icon)}</div>
+                <div class="stat-card reveal" style="transition-delay:${(i % 3) * 0.06}s">
                     <div class="s-num" data-count="${s.count}">0</div>
                     <div class="s-desc">${esc(s.desc)}</div>
                 </div>
@@ -410,10 +397,7 @@
             const prevFocus = document.activeElement;
             modal.dataset.prevFocus = prevFocus ? prevFocus.id || prevFocus.className || '' : '';
 
-            $('#modalHead').style.setProperty('--mc1', t.c1);
-            $('#modalHead').style.setProperty('--mc2', t.c2);
             $('#modalBadge').textContent = t.code;
-            $('#modalBadge').style.background = `linear-gradient(135deg, ${t.c1}, ${t.c2})`;
             $('#modalTitle').textContent = t.name;
             $('#modalPill').textContent = `${t.pos}${ordinal(t.pos)} · ${t.points} pts`;
 
@@ -633,6 +617,32 @@
             }, true);
         }
 
+
+        /* ============================================================
+           WHAT WE TRACK — hover list
+           ============================================================ */
+        function initTrackList() {
+            const list = $('#trackList');
+            const img = $('#trackImg');
+            const cap = $('#trackCap');
+            if (!list || !img) return;
+            const items = list.querySelectorAll('li');
+            const setActive = (li) => {
+                items.forEach(i => i.classList.remove('active'));
+                li.classList.add('active');
+                const src = li.getAttribute('data-img');
+                const c = li.getAttribute('data-cap') || '';
+                if (src) { img.src = src; img.alt = c; }
+                if (cap) cap.textContent = c;
+            };
+            items.forEach(li => {
+                li.addEventListener('mouseenter', () => setActive(li));
+                li.addEventListener('focus', () => setActive(li));
+                li.addEventListener('click', () => setActive(li));
+            });
+            if (items[0]) setActive(items[0]);
+        }
+
         /* ============================================================
            INIT
            ============================================================ */
@@ -647,5 +657,6 @@
             initReveal();
             initCountUp();
             initChrome();
+            initTrackList();
         });
     
