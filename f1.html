@@ -261,6 +261,12 @@
             display: flex;
             align-items: stretch;
             overflow: hidden;
+            perspective: 1200px;
+        }
+        .track-image img {
+            transform: rotateX(var(--trx, 0deg)) rotateY(var(--try, 0deg)) scale(1.04);
+            transition: transform 0.4s cubic-bezier(0.22, 0.9, 0.3, 1.1);
+            will-change: transform;
         }
         .track-image img {
             width: 100%;
@@ -401,9 +407,41 @@
         .tc-code img { height: 30px; width: auto; max-width: 90px; object-fit: contain; }
         .tc-pos { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
         .tc-name { font-size: 1.12rem; padding: 12px 22px 16px; letter-spacing: -0.01em; }
-        .tc-car { position: relative; overflow: hidden; aspect-ratio: 16 / 9; background: var(--bg); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-        .tc-car img { width: 100%; height: 100%; object-fit: contain; display: block; transition: transform 0.5s ease; padding: 10px 6px; }
-        .team-card:hover .tc-car img { transform: scale(1.05); }
+        .tc-car {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            background:
+                radial-gradient(ellipse 90% 70% at 50% 45%, rgba(238, 244, 239, 0.05), transparent 70%),
+                var(--bg);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+        .tc-car img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            padding: 10px 6px;
+            transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1.06);
+            transform-style: preserve-3d;
+            transition: transform 0.4s cubic-bezier(0.22, 0.9, 0.3, 1.1);
+            will-change: transform;
+        }
+        .team-card:hover .tc-car img { filter: brightness(1.06); }
+        .tc-car::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+            background: radial-gradient(340px circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, 0.12), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        .team-card:hover .tc-car::after { opacity: 1; }
         .tc-car .car-fallback-art { display: none; }
         .tc-car.car-fallback .car-fallback-art { display: block; }
         .tc-car.car-fallback img { display: none; }
@@ -715,11 +753,23 @@
         .info-grid .ig .v { font-weight: 600; font-size: 1.05rem; margin-top: 4px; }
         .modal-car {
             border: 1px solid var(--line);
-            background: var(--bg);
+            background:
+                radial-gradient(ellipse 90% 70% at 50% 45%, rgba(238, 244, 239, 0.05), transparent 70%),
+                var(--bg);
             overflow: hidden;
             margin-bottom: 20px;
+            perspective: 1200px;
         }
-        .modal-car img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 16px; }
+        .modal-car img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            padding: 16px;
+            transform: rotateX(var(--mrx, 0deg)) rotateY(var(--mry, 0deg)) scale(1.03);
+            transition: transform 0.4s cubic-bezier(0.22, 0.9, 0.3, 1.1);
+            will-change: transform;
+        }
         .modal-car .f1car { position: relative; height: 220px; }
         .spec-box { border: 1px solid var(--line); }
         .spec-box h4 {

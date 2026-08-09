@@ -33,11 +33,13 @@ interactive "what we track" hover list, spec-table rows, inverted leader rows, h
 - **Race calendar** — the remaining 11 rounds, sprint markers included.
 - **Animated statistics** — count-up numbers on scroll.
 - **Race-winner strip** — winners of all 11 completed grands prix.
-- **Transparent asset pack** — 2026 car liveries (isolated cutouts with
-  transparent backgrounds), official-style team logos, and driver portraits
-  (in `images/`). Liveries/logos were produced from press photos with
-  AI-assisted background removal; Cadillac keeps its original photo.
-  CSS-drawn car fallback if an image ever fails to load.
+- **Real 2026 livery renders** — all 11 teams' official 2026 launch
+  photos/renders, background-removed to transparent cutouts (see
+  `tools/build_liveries.py`; sources in `image-search/`). Team logos and
+  driver portraits included. CSS-drawn car fallback if an image fails.
+- **3D tilt effect** — team car images, the modal car view and the
+  "What we track" panel tilt in 3D following your cursor (with a moving
+  glare highlight), via delegated event handlers — CSP-safe.
 
 ## Security
 

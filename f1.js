@@ -133,7 +133,7 @@
                 milestones: ['2021 — Return to F1 after 61 years away', '2023 — 8 podiums with Fernando Alonso', '2025 — Adrian Newey joins the project', '2026 — Factory Honda power units']
             },
             {
-                key: 'cadillac', code: 'CAD', c1: '#c8b273', c2: '#1b1b1b', img: 'cadillac.jpg', livery: 'cadillac.jpg', logo: 'logos/cadillac.png',
+                key: 'cadillac', code: 'CAD', c1: '#c8b273', c2: '#1b1b1b', img: 'cadillac.jpg', livery: 'cadillac-livery.png', logo: 'logos/cadillac.png',
                 name: 'Cadillac Formula 1 Team', short: 'Cadillac',
                 founded: 2026, base: 'Fishers, USA / Silverstone, UK',
                 principal: 'Graeme Lowdon', engine: 'Ferrari',
@@ -596,6 +596,41 @@
                 const card = e.target.closest('.team-card');
                 if (card) { e.preventDefault(); openTeamModal(card.dataset.team); }
             });
+
+            // ---- 3D tilt effect (delegated, CSP-safe) ----
+            function bindTilt(container, rxVar, ryVar, gxVar, gyVar, maxRx, maxRy) {
+                if (!container) return;
+                let raf = null;
+                container.addEventListener('mousemove', (e) => {
+                    if (raf) return;
+                    raf = requestAnimationFrame(() => {
+                        raf = null;
+                        const r = container.getBoundingClientRect();
+                        if (!r.width || !r.height) return;
+                        const px = (e.clientX - r.left) / r.width - 0.5;
+                        const py = (e.clientY - r.top) / r.height - 0.5;
+                        container.style.setProperty(rxVar, (-py * maxRx).toFixed(2) + 'deg');
+                        container.style.setProperty(ryVar, (px * maxRy).toFixed(2) + 'deg');
+                        if (gxVar) container.style.setProperty(gxVar, ((px + 0.5) * 100).toFixed(1) + '%');
+                        if (gyVar) container.style.setProperty(gyVar, ((py + 0.5) * 100).toFixed(1) + '%');
+                    });
+                });
+                container.addEventListener('mouseleave', () => {
+                    container.style.setProperty(rxVar, '0deg');
+                    container.style.setProperty(ryVar, '0deg');
+                });
+            }
+
+            // Team card cars
+            document.querySelectorAll('.team-card .tc-car').forEach(el => {
+                bindTilt(el, '--rx', '--ry', '--gx', '--gy', 10, 14);
+            });
+            // Track image panel
+            const trackImg = $('#trackImage');
+            if (trackImg) bindTilt(trackImg, '--trx', '--try', null, null, 6, 8);
+            // Modal car image
+            const modalCar = $('#modalCar');
+            if (modalCar) bindTilt(modalCar, '--mrx', '--mry', null, null, 8, 12);
 
             // Image fallback via capture-phase error listener (CSP-compatible)
             document.addEventListener('error', (e) => {
