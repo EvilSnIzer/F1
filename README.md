@@ -3,12 +3,15 @@
 A single-file, framework-free Formula 1 fan website. Open `f1.html` in any
 modern browser — there is no build step, no dependencies, nothing to install.
 
-## Live preview
+## Live site
 
+**https://evilsnizer.github.io/F1/**
+
+Served from the `arena/019fc2f6-f1` branch via GitHub Pages (legacy build with
+`.nojekyll`). Every push to the branch auto-redeploys the site.
+
+Fallback preview (proxies the file from the branch):
 https://htmlpreview.github.io/?https://github.com/EvilSnIzer/F1/blob/arena/019fc2f6-f1/f1.html
-
-(The preview proxies the file straight from this branch, so it always shows
-the latest pushed version.)
 
 ## Features
 
