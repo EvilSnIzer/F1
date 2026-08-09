@@ -28,6 +28,19 @@ https://htmlpreview.github.io/?https://github.com/EvilSnIzer/F1/blob/arena/019fc
 - **Race calendar** — the remaining 11 rounds, sprint markers included.
 - **Animated statistics** — count-up numbers on scroll.
 - **Race-winner strip** — winners of all 11 completed grands prix.
+- **Real photos** — 2026 car shots for all 11 teams and driver portraits for
+  all 22 drivers (in `images/`), with a CSS-drawn car fallback if an image
+  ever fails to load.
+
+## Security
+
+See [PENTEST.md](PENTEST.md) for the full security assessment. Highlights:
+
+- Strict Content-Security-Policy (no inline scripts or event handlers —
+  all JS lives in `f1.js`).
+- All dynamic content escaped; no `eval`, no user input processed.
+- `.git` / `.env` confirmed not exposed; secret scan of history clean.
+- External requests limited to Google Fonts.
 
 ## UX / Accessibility
 
