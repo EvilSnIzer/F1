@@ -81,10 +81,12 @@ assert(document.getElementById('driversStanding').innerHTML.includes('Antonelli'
 assert(document.getElementById('driversStanding').innerHTML.includes('219'), 'Antonelli points shown');
 assert(document.getElementById('teamsStanding').innerHTML.includes('Mercedes'), 'constructors standing rendered');
 assert(document.getElementById('teamsGrid').innerHTML.split('team-card').length === 12, '11 team cards rendered');
-assert(document.getElementById('teamsGrid').innerHTML.includes('images/teams/mercedes.webp'), 'team car image wired');
+assert(document.getElementById('teamsGrid').innerHTML.includes('images/teams/mercedes-livery.png'), 'team livery wired');
+assert(document.getElementById('teamsGrid').innerHTML.includes('images/logos/mercedes.png'), 'team logo wired');
 assert(!document.getElementById('teamsGrid').innerHTML.includes('onclick='), 'no inline onclick in team cards');
 assert(document.getElementById('driversGrid').innerHTML.split('driver-card').length === 23, '22 driver cards rendered');
 assert(document.getElementById('driversGrid').innerHTML.includes('images/drivers/kimi-antonelli.png'), 'driver photo wired');
+assert(document.getElementById('driversGrid').innerHTML.includes('images/logos/mercedes.png'), 'driver card team logo wired');
 assert(document.getElementById('calendarList').innerHTML.split('race-row').length === 12, '11 calendar rows rendered');
 assert(document.getElementById('statsGrid').innerHTML.split('stat-card').length === 7, '6 stat cards rendered');
 assert(document.getElementById('nextCard').innerHTML.includes('Dutch Grand Prix'), 'next race card rendered');
@@ -95,8 +97,9 @@ const openFn = vm.runInThisContext('openTeamModal');
 openFn('ferrari');
 assert(document.getElementById('modalTitle').textContent.includes('Ferrari'), 'modal title set');
 assert(document.getElementById('overviewGrid').innerHTML.includes('Maranello'), 'overview populated');
-assert(document.getElementById('modalCar').innerHTML.includes('images/teams/ferrari.jpg'), 'modal car photo wired');
+assert(document.getElementById('modalCar').innerHTML.includes('images/teams/ferrari-livery.png'), 'modal livery wired');
 assert(document.getElementById('modalCar').getAttribute('data-team') === 'ferrari', 'modal car data-team set');
+assert(document.getElementById('modalBadge').innerHTML.includes('images/logos/ferrari.png'), 'modal logo wired');
 assert(document.getElementById('historyText').textContent.includes('oldest'), 'history populated');
 assert(document.getElementById('seasonStats').innerHTML.includes('307'), 'season stats populated');
 

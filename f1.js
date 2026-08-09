@@ -23,7 +23,7 @@
         /* Constructor data — order follows the current 2026 championship */
         const teams = [
             {
-                key: 'mercedes', code: 'MER', c1: '#00d2be', c2: '#007d8a', img: 'mercedes.webp',
+                key: 'mercedes', code: 'MER', c1: '#00d2be', c2: '#007d8a', img: 'mercedes.webp', livery: 'mercedes-livery.png', logo: 'logos/mercedes.png',
                 name: 'Mercedes-AMG Petronas F1 Team', short: 'Mercedes',
                 founded: 2010, base: 'Brackley, United Kingdom',
                 principal: 'Toto Wolff', engine: 'Mercedes',
@@ -34,7 +34,7 @@
                 milestones: ['2010 — Return to F1 as a constructor', '2014–2021 — 8 consecutive constructors\u2019 titles', '2014–2020 — 7 straight drivers\u2019 titles (Hamilton, Rosberg)', '2026 — Antonelli leads the championship mid-season']
             },
             {
-                key: 'ferrari', code: 'FER', c1: '#e8002d', c2: '#7a0016', img: 'ferrari.jpg',
+                key: 'ferrari', code: 'FER', c1: '#e8002d', c2: '#7a0016', img: 'ferrari.jpg', livery: 'ferrari-livery.png', logo: 'logos/ferrari.png',
                 name: 'Scuderia Ferrari HP', short: 'Ferrari',
                 founded: 1950, base: 'Maranello, Italy',
                 principal: 'Frédéric Vasseur', engine: 'Ferrari',
@@ -45,7 +45,7 @@
                 milestones: ['1950 — Founding member of the F1 world championship', '16 constructors\u2019 titles — most in F1 history', '2025 — Hamilton joins from Mercedes', '2026 — Wins in Spain (Hamilton) & Britain (Leclerc)']
             },
             {
-                key: 'mclaren', code: 'MCL', c1: '#ff8000', c2: '#b34700', img: 'mclaren.jpg',
+                key: 'mclaren', code: 'MCL', c1: '#ff8000', c2: '#b34700', img: 'mclaren.jpg', livery: 'mclaren-livery.png', logo: 'logos/mclaren.png',
                 name: 'McLaren Formula 1 Team', short: 'McLaren',
                 founded: 1966, base: 'Woking, United Kingdom',
                 principal: 'Andrea Stella', engine: 'Mercedes',
@@ -56,7 +56,7 @@
                 milestones: ['1966 — Founded by Bruce McLaren', '1988 — 15 wins from 16 races with Senna & Prost', '1998 — Häkkinen wins the drivers\u2019 title', '2025 — Constructors\u2019 title & Norris becomes champion']
             },
             {
-                key: 'redbull', code: 'RBR', c1: '#3671c6', c2: '#0f1b4c', img: 'redbull.jpg',
+                key: 'redbull', code: 'RBR', c1: '#3671c6', c2: '#0f1b4c', img: 'redbull.jpg', livery: 'redbull-livery.png', logo: 'logos/redbull.png',
                 name: 'Oracle Red Bull Racing', short: 'Red Bull Racing',
                 founded: 2005, base: 'Milton Keynes, United Kingdom',
                 principal: 'Laurent Mekies', engine: 'Red Bull Ford',
@@ -67,7 +67,7 @@
                 milestones: ['2005 — Entry into F1 with the Jaguar takeover', '2010–2013 — 4 titles with Sebastian Vettel', '2021–2024 — 4 titles with Max Verstappen', '2026 — New leadership: Laurent Mekies as team principal']
             },
             {
-                key: 'rb', code: 'RB', c1: '#1c3f8f', c2: '#a61b29', img: 'rb.jpg',
+                key: 'rb', code: 'RB', c1: '#1c3f8f', c2: '#a61b29', img: 'rb.jpg', livery: 'rb-livery.png', logo: 'logos/rb.png',
                 name: 'Visa Cash App Racing Bulls', short: 'Racing Bulls',
                 founded: 2006, base: 'Faenza, Italy',
                 principal: 'Alan Permane', engine: 'Red Bull Ford',
@@ -78,7 +78,7 @@
                 milestones: ['2006 — Debut as Scuderia Toro Rosso', '2008 — Vettel wins the Italian GP for Toro Rosso', '2016 — Verstappen\u2019s first F1 win at Barcelona', '2026 — Rookie Lindblad joins the grid']
             },
             {
-                key: 'alpine', code: 'ALP', c1: '#0093cc', c2: '#f064b6', img: 'alpine.jpg',
+                key: 'alpine', code: 'ALP', c1: '#0093cc', c2: '#f064b6', img: 'alpine.jpg', livery: 'alpine-livery.png', logo: 'logos/alpine.png',
                 name: 'BWT Alpine F1 Team', short: 'Alpine',
                 founded: 2021, base: 'Enstone, United Kingdom',
                 principal: 'Flavio Briatore & Steve Nielsen', engine: 'Mercedes',
@@ -89,7 +89,7 @@
                 milestones: ['1995–2005 — Titles as Benetton & Renault', '2005–2006 — Double constructors\u2019 titles as Renault', '2021 — Rebranded as Alpine', '2026 — Switch to Mercedes power units']
             },
             {
-                key: 'haas', code: 'HAA', c1: '#e5e5e5', c2: '#8f0f14', img: 'haas.jpg',
+                key: 'haas', code: 'HAA', c1: '#e5e5e5', c2: '#8f0f14', img: 'haas.jpg', livery: 'haas-livery.png', logo: 'logos/haas.png',
                 name: 'Haas F1 Team', short: 'Haas',
                 founded: 2016, base: 'Kannapolis, USA / Banbury, UK',
                 principal: 'Ayao Komatsu', engine: 'Ferrari',
@@ -100,7 +100,7 @@
                 milestones: ['2016 — First American-led team since the 1980s', '2018 — 5th in the constructors\u2019 championship', '2024 — Bearman debuts as a Ferrari stand-in', '2026 — Esteban Ocon joins the lineup']
             },
             {
-                key: 'audi', code: 'AUD', c1: '#e30613', c2: '#3b3b3b', img: 'audi.jpg',
+                key: 'audi', code: 'AUD', c1: '#e30613', c2: '#3b3b3b', img: 'audi.jpg', livery: 'audi-livery.png', logo: 'logos/audi.png',
                 name: 'Audi F1 Team', short: 'Audi',
                 founded: 2026, base: 'Hinwil, Switzerland',
                 principal: 'Jonathan Wheatley', engine: 'Audi',
@@ -111,7 +111,7 @@
                 milestones: ['2026 — Works debut with an Audi power unit', 'Hinwil base inherited from Sauber (since 1993)', '2026 — Bortoleto scores Audi\u2019s first points']
             },
             {
-                key: 'williams', code: 'WIL', c1: '#005aff', c2: '#041e42', img: 'williams.jpg',
+                key: 'williams', code: 'WIL', c1: '#005aff', c2: '#041e42', img: 'williams.jpg', livery: 'williams-livery.png', logo: 'logos/williams.png',
                 name: 'Atlassian Williams Racing', short: 'Williams',
                 founded: 1977, base: 'Grove, United Kingdom',
                 principal: 'James Vowles', engine: 'Mercedes',
@@ -122,7 +122,7 @@
                 milestones: ['1977 — Founded by Sir Frank Williams', '1980–1997 — 9 constructors\u2019 titles', '114 grand prix victories', '2025 — Sainz joins alongside Albon']
             },
             {
-                key: 'aston', code: 'AMR', c1: '#00a06a', c2: '#005c3e', img: 'aston.jpg',
+                key: 'aston', code: 'AMR', c1: '#00a06a', c2: '#005c3e', img: 'aston.jpg', livery: 'aston-livery.png', logo: 'logos/aston.png',
                 name: 'Aston Martin Aramco F1 Team', short: 'Aston Martin',
                 founded: 2021, base: 'Silverstone, United Kingdom',
                 principal: 'Adrian Newey', engine: 'Honda',
@@ -133,7 +133,7 @@
                 milestones: ['2021 — Return to F1 after 61 years away', '2023 — 8 podiums with Fernando Alonso', '2025 — Adrian Newey joins the project', '2026 — Factory Honda power units']
             },
             {
-                key: 'cadillac', code: 'CAD', c1: '#c8b273', c2: '#1b1b1b', img: 'cadillac.jpg',
+                key: 'cadillac', code: 'CAD', c1: '#c8b273', c2: '#1b1b1b', img: 'cadillac.jpg', livery: 'cadillac.jpg', logo: 'logos/cadillac.png',
                 name: 'Cadillac Formula 1 Team', short: 'Cadillac',
                 founded: 2026, base: 'Fishers, USA / Silverstone, UK',
                 principal: 'Graeme Lowdon', engine: 'Ferrari',
@@ -283,13 +283,13 @@
                 <article class="team-card reveal" data-team="${t.key}" tabindex="0" role="button"
                          aria-label="Open ${esc(t.name)} details" style="transition-delay:${(i % 3) * 0.08}s">
                     <div class="tc-top">
-                        <span class="tc-code">${esc(t.code)}</span>
+                        <span class="tc-code"><img src="images/${esc(t.logo)}" alt="${esc(t.short)} logo" loading="lazy" width="80" height="80"> ${esc(t.code)}</span>
                         <span class="tc-pos">${t.pos}${ordinal(t.pos)} · ${t.points} pts</span>
                     </div>
                     <h3 class="tc-name">${esc(t.name)}</h3>
                     <div class="tc-car car">
-                        <img src="images/teams/${t.img}" alt="${esc(t.short)} 2026 F1 car"
-                             loading="lazy" width="600" height="340">
+                        <img class="livery-img" src="images/teams/${t.livery}" alt="${esc(t.short)} 2026 F1 car"
+                             loading="lazy" width="640" height="360">
                         <div class="car-fallback-art">${carArt(t.c1, t.c2, t.code)}</div>
                     </div>
                     <dl class="spec">
@@ -325,7 +325,10 @@
                                  loading="lazy" width="136" height="136">
                         </div>
                         <h3 class="dc-name">${esc(d.name)} ${esc(d.flag)}</h3>
-                        <p class="dc-team">${esc(t.short)}</p>
+                        <p class="dc-team">
+                            <img class="dc-logo" src="images/${esc(t.logo)}" alt="${esc(t.short)} logo" loading="lazy" width="60" height="60">
+                            ${esc(t.short)}
+                        </p>
                         <dl class="spec spec-mini">
                             <div class="spec-row"><dt>Position</dt><dd>${d.pos}</dd></div>
                             <div class="spec-row"><dt>Points</dt><dd>${d.pts}</dd></div>
@@ -397,7 +400,7 @@
             const prevFocus = document.activeElement;
             modal.dataset.prevFocus = prevFocus ? prevFocus.id || prevFocus.className || '' : '';
 
-            $('#modalBadge').textContent = t.code;
+            $('#modalBadge').innerHTML = `<img src="images/${esc(t.logo)}" alt="${esc(t.short)} logo" width="40" height="40">`;
             $('#modalTitle').textContent = t.name;
             $('#modalPill').textContent = `${t.pos}${ordinal(t.pos)} · ${t.points} pts`;
 
@@ -414,7 +417,7 @@
             /* Car tab */
             $('#modalCar').setAttribute('data-team', t.key);
             $('#modalCar').innerHTML = `
-                <img src="images/teams/${t.img}" alt="${esc(t.short)} 2026 F1 car"
+                <img class="livery-img" src="images/teams/${t.livery}" alt="${esc(t.short)} 2026 F1 car"
                      loading="lazy" width="800" height="450">
             `;
             $('#carSpecs').innerHTML = `

@@ -33,9 +33,11 @@ interactive "what we track" hover list, spec-table rows, inverted leader rows, h
 - **Race calendar** — the remaining 11 rounds, sprint markers included.
 - **Animated statistics** — count-up numbers on scroll.
 - **Race-winner strip** — winners of all 11 completed grands prix.
-- **Real photos** — 2026 car shots for all 11 teams and driver portraits for
-  all 22 drivers (in `images/`), with a CSS-drawn car fallback if an image
-  ever fails to load.
+- **Transparent asset pack** — 2026 car liveries (isolated cutouts with
+  transparent backgrounds), official-style team logos, and driver portraits
+  (in `images/`). Liveries/logos were produced from press photos with
+  AI-assisted background removal; Cadillac keeps its original photo.
+  CSS-drawn car fallback if an image ever fails to load.
 
 ## Security
 
