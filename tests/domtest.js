@@ -81,7 +81,7 @@ assert(document.getElementById('driversStanding').innerHTML.includes('Antonelli'
 assert(document.getElementById('driversStanding').innerHTML.includes('219'), 'Antonelli points shown');
 assert(document.getElementById('teamsStanding').innerHTML.includes('Mercedes'), 'constructors standing rendered');
 assert(document.getElementById('teamsGrid').innerHTML.split('team-card').length === 12, '11 team cards rendered');
-assert(document.getElementById('teamsGrid').innerHTML.includes('images/teams/mercedes-livery.webp'), 'team livery wired');
+assert(document.getElementById('teamsGrid').innerHTML.includes('images/teams/mercedes-car.png'), 'team livery wired');
 assert(document.getElementById('teamsGrid').innerHTML.includes('images/logos/mercedes.png'), 'team logo wired');
 assert(!document.getElementById('teamsGrid').innerHTML.includes('onclick='), 'no inline onclick in team cards');
 assert(document.getElementById('driversGrid').innerHTML.split('driver-card').length === 23, '22 driver cards rendered');
@@ -97,7 +97,7 @@ const openFn = vm.runInThisContext('openTeamModal');
 openFn('ferrari');
 assert(document.getElementById('modalTitle').textContent.includes('Ferrari'), 'modal title set');
 assert(document.getElementById('overviewGrid').innerHTML.includes('Maranello'), 'overview populated');
-assert(document.getElementById('modalCar').innerHTML.includes('images/teams/ferrari-livery.webp'), 'modal livery wired');
+assert(document.getElementById('modalCar').innerHTML.includes('images/teams/ferrari-car.png'), 'modal livery wired');
 assert(document.getElementById('modalCar').getAttribute('data-team') === 'ferrari', 'modal car data-team set');
 assert(document.getElementById('modalBadge').innerHTML.includes('images/logos/ferrari.png'), 'modal logo wired');
 assert(document.getElementById('historyText').textContent.includes('oldest'), 'history populated');
