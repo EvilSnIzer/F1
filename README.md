@@ -3,6 +3,13 @@
 A single-file, framework-free Formula 1 fan website. Open `f1.html` in any
 modern browser — there is no build step, no dependencies, nothing to install.
 
+## Live preview
+
+https://htmlpreview.github.io/?https://github.com/EvilSnIzer/F1/blob/arena/019fc2f6-f1/f1.html
+
+(The preview proxies the file straight from this branch, so it always shows
+the latest pushed version.)
+
 ## Features
 
 - **Live 2026 championship data** — drivers' & constructors' standings as of the
